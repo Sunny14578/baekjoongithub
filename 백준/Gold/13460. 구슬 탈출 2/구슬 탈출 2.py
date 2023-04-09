@@ -28,7 +28,7 @@ visit = []
 
 def bfs():
     q = deque()
-    q.append([red[0], red[1], blue[0], blue[1], 0])
+    q.append([red[0], red[1], blue[0], blue[1], 1])
     visit.append([red[0], red[1], blue[0], blue[1]])
       
     while q:
@@ -46,10 +46,7 @@ def bfs():
                     visit.append([nrx, nry, nbx, nby])
                                
             if check == 1:
-                if depth >= 10:
-                    break
-                else:
-                    return depth+1
+                return depth
         
     return -1
     
