@@ -71,7 +71,7 @@ def move(rx, ry, bx, by, d):
                 if arr[nrx][nry] == 'O':            
                     check = 1
             else:
-                nrx -= dx[d]
+                nrx -= dx[d]  # '#'에 도착했다면 해당 좌표는 이동하면 안되므로 -하여 한칸다시 되돌린다.
                 nry -= dy[d]
                 break
                 
@@ -88,8 +88,9 @@ def move(rx, ry, bx, by, d):
                 nby -= dy[d]
                 break
                 
-    if nrx == nbx and nry == nby:
-        if abs(nrx - rx) + abs(nry - ry) > abs(nbx - bx) + abs(nby - by):
+    if nrx == nbx and nry == nby:  #   #...RB 이와 같은경우에는 
+                                   # 두 공다 #(RB).... 겹치게되므로 좌표가 같은경우는 처리해줘야한다.
+        if abs(nrx - rx) + abs(nry - ry) > abs(nbx - bx) + abs(nby - by): # 이동한 거리가 더 긴공을 한칸 뒤로 이동시켰다.
             nrx -= dx[d]
             nry -= dy[d]
         else:
