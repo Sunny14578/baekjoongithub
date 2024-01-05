@@ -1,5 +1,5 @@
 n = int(input())
-a = list(set(map(int, input().split())))
+a = list(map(int, input().split()))
 m = int(input())
 find = list(map(int, input().split()))
 
