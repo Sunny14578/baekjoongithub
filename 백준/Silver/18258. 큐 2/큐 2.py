@@ -19,10 +19,10 @@ for i in range(n):
         else:
             print(1)
     elif com[0] == 'front':
-        if len(queue) == 0:
-            print(-1)
-        else:
+        if queue:
             print(queue[0])
+        else:
+            print(-1)
     elif com[0] == 'back':
         if queue:
             print(queue[-1])
