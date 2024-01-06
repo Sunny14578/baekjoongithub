@@ -1,5 +1,7 @@
 from collections import deque
-n, k = map(int, input().split())
+import sys
+
+n, k = map(int, sys.stdin.readline().split())
 q = deque(range(1, n+1))
 
 answer = []
