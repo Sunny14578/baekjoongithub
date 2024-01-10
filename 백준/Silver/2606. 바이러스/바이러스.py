@@ -25,5 +25,8 @@ def bfs(x):
                 Q.append(i)
                 
     return visit
-                
-print(sum(bfs(1))-1)
+
+if m == 1 and n == 0:
+    print(0)
+else:
+    print(sum(bfs(1))-1)
