@@ -3,26 +3,40 @@ input = sys.stdin.readline
 from collections import deque
 
 n, k = map(int, input().split())
-belt = deque(list(map(int, input().split())))
-robot = deque([0]*n)
-res = 0
+c = list(map(int, input().split()))
 
-while 1:
-    belt.rotate(1)
-    robot.rotate(1)
-    robot[-1]=0 #로봇이 내려가는 부분이니 0
-    if sum(robot): #로봇이 존재하면
-        for i in range(n-2, -1, -1): #로봇 내려가는 부분 인덱스 i-1 이므로 그 전인 i-2부터
-            if robot[i] == 1 and robot[i+1] == 0 and belt[i+1]>=1:
-                robot[i+1] = 1
-                robot[i] = 0
-                belt[i+1] -= 1
-        robot[-1]=0 #이 부분도 로봇 out -> 0임
-    if robot[0] == 0 and belt[0]>=1:
-        robot[0] = 1
-        belt[0] -= 1
-    res += 1
-    if belt.count(0) >= k:
+l = deque(c)
+bot = deque([0]*n)
+cnt = 0
+
+def move():
+    global cnt
+    
+    l.rotate() # 컨테이너 옮기기
+    bot.rotate()
+    bot[n-1] = 0
+    
+    for i in range(n-2, -1, -1): # 로봇 옮기기           
+        if bot[i] == 1 and l[i+1] > 0 and bot[i+1] != 1: # 로봇 옮기기
+            bot[i+1], bot[i] = [1, 0]
+            l[i+1] -= 1
+            
+        bot[n-1] = 0
+
+    cnt += 1
+
+while True:
+    dur = l.count(0)
+    
+    if dur >= k:
         break
-                
-print(res)
+        
+    # 1번에 해당하는 로직 수행
+    move()
+        
+    # 로봇올리기
+    if l[0] != 0:
+        bot[0] = 1
+        l[0] -= 1
+    
+print(cnt)
