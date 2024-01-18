@@ -1,21 +1,17 @@
+import sys
+
+input = sys.stdin.readline
+
 n = int(input())
+dis = list(map(int, input().split()))
+price = list(map(int, input().split()))
 
-l1 = list(map(int, input().split(' ')))
-l2 = list(map(int, input().split(' ')))
-
-l3 = l2.copy()
-l3.sort()
-l1.append(0)
-
+MIN = price[0]
 money = 0
-mini = l2[0]
-cnt = 0
 
-for i in range(0, len(l2)):
-    if mini > l2[i]:
-        mini = l2[i]
+for i in range(len(dis)):
+    if MIN > price[i]:
+        MIN = price[i]
     
-    money += (mini * l1[cnt])
-    cnt+=1
-        
+    money += MIN * dis[i]
 print(money)
