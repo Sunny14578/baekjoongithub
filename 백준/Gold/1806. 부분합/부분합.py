@@ -1,24 +1,32 @@
 import sys
 input = sys.stdin.readline
-n, m = map(int,input().split())
-arr = list(map(int,input().split()))
-s = [0]
-for i in range(n):
-    s.append(s[i] + arr[i])
-answer = sys.maxsize
-l = 0
-r = 1
-while l < n:
-    if s[r] - s[l] < m:
-        if r < n:
-            r += 1
-        else:
-            l += 1
-    else:
-        answer = min(answer, r-l)
-        l += 1
 
-if answer == sys.maxsize:
+n, m = map(int, input().split())
+l = list(map(int, input().split()))
+
+prefix = [0] * (n+1)
+prefix[1] = l[0]
+
+for i in range(2, n+1):
+    prefix[i] = prefix[i-1]+l[i-1]
+
+MIN = n+1
+left = 0
+right = 1
+
+while left < n:
+    dis = prefix[right] - prefix[left]
+    
+    if dis < m:
+        if right < n:
+            right += 1
+        else:
+            left += 1
+    else:
+        MIN = min(MIN, right-left)
+        left += 1
+   
+if MIN == n+1:
     print(0)
 else:
-    print(answer)
+    print(MIN)
